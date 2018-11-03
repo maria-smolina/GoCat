@@ -19,6 +19,8 @@ public class PointSurface extends SurfaceView {
 
     private class PointAnimation extends Thread {
         private static final int DELAY = 100;
+        private static final int POINT_WIDTH = 170;
+        private static final int POINT_HEIGHT = 170;
 
         @Override
         public void run() {
@@ -44,6 +46,7 @@ public class PointSurface extends SurfaceView {
                 d.draw(canvas);
                 Paint paint = new Paint();
                 Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.point);
+                bitmap = Bitmap.createScaledBitmap(bitmap, POINT_WIDTH, POINT_HEIGHT, false);
                 canvas.drawBitmap(bitmap, new Random().nextInt(width - bitmap.getWidth()), new Random().nextInt(height - bitmap.getHeight()), paint);
                 holder.unlockCanvasAndPost(canvas);
             }
