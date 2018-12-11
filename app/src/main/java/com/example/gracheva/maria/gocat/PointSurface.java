@@ -21,7 +21,7 @@ public class PointSurface extends SurfaceView {
         super(context);
         holder = getHolder();
         paint = new Paint();
-        wallpaper = getResources().getDrawable(R.drawable.wallpaper);
+        wallpaper = getResources().getDrawable(R.drawable.wallpaper, null);
         new PointAnimation().start();
     }
 

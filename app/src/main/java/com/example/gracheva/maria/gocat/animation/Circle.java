@@ -3,9 +3,9 @@ package com.example.gracheva.maria.gocat.animation;
 import java.util.function.Consumer;
 
 public class Circle {
-    Point radius;
-    Point center;
-    long delay;
+    private Point radius;
+    private Point center;
+    private long delay;
 
     public Circle(Point radius, Point center, long delay) {
         this.radius = radius;
@@ -15,14 +15,11 @@ public class Circle {
 
     public void animate(Consumer<Point> draw) throws InterruptedException {
         Double angle = 0.;
-        while (true) {
+        while (angle < 2 * Math.PI) {
             Point coordinates = nextCoordinates(radius, center, angle);
             draw.accept(coordinates);
             Thread.sleep(delay);
             angle += 0.1;
-            if (angle > 2 * Math.PI) {
-                angle = 0.;
-            }
         }
     }
 
