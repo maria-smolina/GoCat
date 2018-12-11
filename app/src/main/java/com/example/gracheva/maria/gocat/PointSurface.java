@@ -12,8 +12,15 @@ import android.view.SurfaceView;
 import java.util.Random;
 
 public class PointSurface extends SurfaceView {
+    SurfaceHolder holder;
+    Paint paint;
+    Drawable wallpaper;
+
     public PointSurface(Context context) {
         super(context);
+        holder = getHolder();
+        paint = new Paint();
+        wallpaper = getResources().getDrawable(R.drawable.wallpaper);
         new PointAnimation().start();
     }
 
@@ -36,20 +43,41 @@ public class PointSurface extends SurfaceView {
         }
 
         private void draw() {
-            SurfaceHolder holder = getHolder();
             Canvas canvas = holder.lockCanvas();
             if (canvas != null) {
-                Drawable d = getResources().getDrawable(R.drawable.wallpaper);
                 int width = getWidth();
                 int height = getHeight();
-                d.setBounds(0, 0, width, height);
-                d.draw(canvas);
-                Paint paint = new Paint();
+                wallpaper.setBounds(0, 0, width, height);
+                wallpaper.draw(canvas);
                 Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.point);
                 bitmap = Bitmap.createScaledBitmap(bitmap, POINT_WIDTH, POINT_HEIGHT, false);
-                canvas.drawBitmap(bitmap, new Random().nextInt(width - bitmap.getWidth()), new Random().nextInt(height - bitmap.getHeight()), paint);
+                Point next = nextCoordinates(width, height, bitmap.getWidth(), bitmap.getHeight());
+                canvas.drawBitmap(bitmap, next.getX(), next.getY(), paint);
                 holder.unlockCanvasAndPost(canvas);
             }
+        }
+
+        private Point nextCoordinates(int width, int height, int bitmapWidth, int bitmapHeight) {
+            return new Point(new Random().nextInt(width - bitmapWidth), new Random().nextInt(height - bitmapHeight));
+        }
+
+    }
+
+    private static class Point {
+        int x;
+        int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
         }
     }
 }
