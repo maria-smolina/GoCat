@@ -9,7 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.Random;
+import com.example.gracheva.maria.gocat.animation.Circle;
+import com.example.gracheva.maria.gocat.animation.Point;
 
 public class PointSurface extends SurfaceView {
     SurfaceHolder holder;
@@ -25,24 +26,23 @@ public class PointSurface extends SurfaceView {
     }
 
     private class PointAnimation extends Thread {
-        private static final int DELAY = 100;
+        private static final int DELAY = 2;
         private static final int POINT_WIDTH = 170;
         private static final int POINT_HEIGHT = 170;
 
         @Override
         public void run() {
             try {
-                while (true) {
-                    draw();
-                    sleep(DELAY);
-                }
+                Point radius = new Point(200, 500);
+                Point center = new Point(500, 500);
+                Circle circle = new Circle(radius, center, DELAY);
+                circle.animate(this::draw);
             } catch (InterruptedException e) {
                 System.out.println("Point animation is interrupted");
             }
-
         }
 
-        private void draw() {
+        private void draw(Point point) {
             Canvas canvas = holder.lockCanvas();
             if (canvas != null) {
                 int width = getWidth();
@@ -51,33 +51,9 @@ public class PointSurface extends SurfaceView {
                 wallpaper.draw(canvas);
                 Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.point);
                 bitmap = Bitmap.createScaledBitmap(bitmap, POINT_WIDTH, POINT_HEIGHT, false);
-                Point next = nextCoordinates(width, height, bitmap.getWidth(), bitmap.getHeight());
-                canvas.drawBitmap(bitmap, next.getX(), next.getY(), paint);
+                canvas.drawBitmap(bitmap, (float) point.getX(), (float) point.getY(), paint);
                 holder.unlockCanvasAndPost(canvas);
             }
-        }
-
-        private Point nextCoordinates(int width, int height, int bitmapWidth, int bitmapHeight) {
-            return new Point(new Random().nextInt(width - bitmapWidth), new Random().nextInt(height - bitmapHeight));
-        }
-
-    }
-
-    private static class Point {
-        int x;
-        int y;
-
-        public Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
         }
     }
 }
