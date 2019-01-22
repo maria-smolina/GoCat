@@ -9,7 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.gracheva.maria.gocat.animation.Circle;
+import com.example.gracheva.maria.gocat.animation.Curve;
 import com.example.gracheva.maria.gocat.animation.Point;
 
 public class PointSurface extends SurfaceView {
@@ -33,10 +33,17 @@ public class PointSurface extends SurfaceView {
         @Override
         public void run() {
             try {
-                Point radius = new Point(200, 500);
-                Point center = new Point(500, 500);
-                Circle circle = new Circle(radius, center, DELAY);
-                circle.animate(this::draw);
+//                Point startingPoint = new Point(300, 300);
+//                Point center = new Point(500, 500);
+//                Circle circle = new Circle(startingPoint, center, false, DELAY);
+//                circle.animate(this::draw);
+
+                Point startingPoint = new Point(400, 500);
+                Point middlePoint = new Point(600, 600);
+                Point endPoint = new Point(300, 700);
+                Curve curve = new Curve(startingPoint, middlePoint, endPoint, DELAY);
+                curve.animate(this::draw);
+
             } catch (InterruptedException e) {
                 System.out.println("Point animation is interrupted");
             }
