@@ -4,19 +4,21 @@ import java.util.function.Consumer;
 
 public class Curve extends Figure {
     private Point middlePoint;
-    private CircleUtils circleUtils;
+    private Point center;
+    private double radius;
 
     public Curve(Point startingPoint, Point middlePoint, Point endPoint, long delay) {
         super(startingPoint, endPoint, delay);
         this.middlePoint = middlePoint;
-        this.circleUtils = new CircleUtils(startingPoint, calculateCenter());
+        this.center = calculateCenter();
+        this.radius = CircleUtils.INSTANCE.getRadius(startingPoint, center);
     }
 
     @Override
     public void animate(Consumer<Point> draw) throws InterruptedException {
-        double startingAngle = circleUtils.getAngle(startingPoint);
-        double middleAngle = circleUtils.getAngle(middlePoint);
-        double endAngle = circleUtils.getAngle(endPoint);
+        double startingAngle = CircleUtils.INSTANCE.getAngle(startingPoint, center, radius);
+        double middleAngle = CircleUtils.INSTANCE.getAngle(middlePoint, center, radius);
+        double endAngle = CircleUtils.INSTANCE.getAngle(endPoint, center, radius);
         double diffAngle = endAngle - startingAngle;
         if (diffAngle < 0) {
             diffAngle *= -1;
@@ -33,7 +35,10 @@ public class Curve extends Figure {
         }
         double diff = 0.;
         while (diff < diffAngle) {
-            Point coordinates = circleUtils.nextCoordinates(startingAngle + diff * directionFactor);
+            Point coordinates = CircleUtils.INSTANCE.nextCoordinates(
+                    startingAngle + diff * directionFactor,
+                    center,
+                    radius);
             draw.accept(coordinates);
             Thread.sleep(delay);
             diff += 0.1;
