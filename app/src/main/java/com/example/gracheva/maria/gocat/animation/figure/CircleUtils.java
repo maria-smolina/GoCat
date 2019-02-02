@@ -1,4 +1,4 @@
-package com.example.gracheva.maria.gocat.animation;
+package com.example.gracheva.maria.gocat.animation.figure;
 
 import com.example.gracheva.maria.gocat.animation.geometry.Point;
 

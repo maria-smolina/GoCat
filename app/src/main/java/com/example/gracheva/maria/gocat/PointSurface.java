@@ -9,10 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.example.gracheva.maria.gocat.animation.Circle;
-import com.example.gracheva.maria.gocat.animation.Curve;
-import com.example.gracheva.maria.gocat.animation.Figure;
-import com.example.gracheva.maria.gocat.animation.Line;
+import com.example.gracheva.maria.gocat.animation.figure.Circle;
+import com.example.gracheva.maria.gocat.animation.figure.Curve;
+import com.example.gracheva.maria.gocat.animation.figure.Figure;
+import com.example.gracheva.maria.gocat.animation.figure.Line;
 import com.example.gracheva.maria.gocat.animation.geometry.Point;
 
 public class PointSurface extends SurfaceView {
