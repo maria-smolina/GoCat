@@ -1,5 +1,7 @@
 package com.example.gracheva.maria.gocat.animation;
 
+import com.example.gracheva.maria.gocat.animation.geometry.Point;
+
 import java.util.function.Consumer;
 
 public abstract class Figure {

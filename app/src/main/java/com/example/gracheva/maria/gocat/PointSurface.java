@@ -12,7 +12,8 @@ import android.view.SurfaceView;
 import com.example.gracheva.maria.gocat.animation.Circle;
 import com.example.gracheva.maria.gocat.animation.Curve;
 import com.example.gracheva.maria.gocat.animation.Figure;
-import com.example.gracheva.maria.gocat.animation.Point;
+import com.example.gracheva.maria.gocat.animation.Line;
+import com.example.gracheva.maria.gocat.animation.geometry.Point;
 
 public class PointSurface extends SurfaceView {
     SurfaceHolder holder;
@@ -28,24 +29,38 @@ public class PointSurface extends SurfaceView {
     }
 
     private class PointAnimation extends Thread {
-        private static final int DELAY = 2;
+        private static final int DELAY = 50;
         private static final int POINT_WIDTH = 170;
         private static final int POINT_HEIGHT = 170;
 
         @Override
         public void run() {
             try {
-                Point startingPoint = new Point(300, 300);
-                Point center = new Point(500, 500);
-                Figure circle = new Circle(startingPoint, center, false, DELAY);
-                circle.animate(this::draw);
+                Point point1 = new Point(300, 300);
+                Point point2 = new Point(600, 600);
+                Point point3 = new Point(300, 700);
+                Point point4 = new Point(300, 1000);
 
-                startingPoint = new Point(400, 500);
-                Point middlePoint = new Point(600, 600);
-                Point endPoint = new Point(300, 700);
-                Figure curve = new Curve(startingPoint, middlePoint, endPoint, DELAY);
-                curve.animate(this::draw);
+                Point center = new Point(350, 350);
+                Figure circle = new Circle(point1, center, false, DELAY);
 
+                Point center2 = new Point(600, 600);
+                Figure circle2 = new Circle(point1, center2, false, DELAY);
+
+                Figure curve = new Curve(point1, point2, point3, DELAY);
+
+                Figure line = new Line(point3, point1, DELAY);
+                Figure line2 = new Line(point1, point4, DELAY);
+                Figure line3 = new Line(point4, point1, DELAY);
+
+                while (true) {
+                    circle.animate(this::draw);
+                    circle2.animate(this::draw);
+                    curve.animate(this::draw);
+                    line.animate(this::draw);
+                    line2.animate(this::draw);
+                    line3.animate(this::draw);
+                }
             } catch (InterruptedException e) {
                 System.out.println("Point animation is interrupted");
             }

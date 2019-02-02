@@ -1,5 +1,7 @@
 package com.example.gracheva.maria.gocat.animation;
 
+import com.example.gracheva.maria.gocat.animation.geometry.Point;
+
 public class CircleUtils {
     public static final CircleUtils INSTANCE = new CircleUtils();
 

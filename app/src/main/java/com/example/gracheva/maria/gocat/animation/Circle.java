@@ -1,5 +1,7 @@
 package com.example.gracheva.maria.gocat.animation;
 
+import com.example.gracheva.maria.gocat.animation.geometry.Point;
+
 import java.util.function.Consumer;
 
 public class Circle extends Figure {
@@ -8,7 +10,7 @@ public class Circle extends Figure {
     private int directionFactor;
 
     public Circle(Point startingPoint, Point center, boolean clockwise, long delay) {
-        super(startingPoint, null, delay);
+        super(startingPoint, startingPoint, delay);
         this.directionFactor = clockwise ? 1 : -1;
         this.center = center;
         this.radius = CircleUtils.INSTANCE.getRadius(startingPoint, center);

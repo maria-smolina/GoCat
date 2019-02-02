@@ -1,4 +1,4 @@
-package com.example.gracheva.maria.gocat.animation;
+package com.example.gracheva.maria.gocat.animation.geometry;
 
 public class Point {
     private double x;
@@ -15,5 +15,13 @@ public class Point {
 
     public double getY() {
         return y;
+    }
+
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 }
