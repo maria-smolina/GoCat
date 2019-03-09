@@ -24,4 +24,23 @@ public class Point {
     public void setY(double y) {
         this.y = y;
     }
+
+    public void scale(int width, int height) {
+        x *= width;
+        y *= height;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Double.compare(point.x, x) == 0 &&
+                Double.compare(point.y, y) == 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" + "x=" + x + ", y=" + y + '}';
+    }
 }

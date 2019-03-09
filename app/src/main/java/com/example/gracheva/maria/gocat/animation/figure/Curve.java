@@ -2,22 +2,22 @@ package com.example.gracheva.maria.gocat.animation.figure;
 
 import com.example.gracheva.maria.gocat.animation.geometry.Point;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 
 public class Curve extends Figure {
     private Point middlePoint;
     private Point center;
     private double radius;
 
-    public Curve(Point startingPoint, Point middlePoint, Point endPoint, long delay) {
-        super(startingPoint, endPoint, delay);
+    public Curve(Point startingPoint, Point middlePoint, Point endPoint, long delay, boolean relativeCoordinates) {
+        super(startingPoint, endPoint, delay, relativeCoordinates);
         this.middlePoint = middlePoint;
         this.center = calculateCenter();
         this.radius = CircleUtils.INSTANCE.getRadius(startingPoint, center);
     }
 
     @Override
-    public void animate(Consumer<Point> draw) throws InterruptedException {
+    public void animate(BiConsumer<Boolean, Point> draw) throws InterruptedException {
         double startingAngle = CircleUtils.INSTANCE.getAngle(startingPoint, center, radius);
         double middleAngle = CircleUtils.INSTANCE.getAngle(middlePoint, center, radius);
         double endAngle = CircleUtils.INSTANCE.getAngle(endPoint, center, radius);
@@ -41,7 +41,7 @@ public class Curve extends Figure {
                     startingAngle + diff * directionFactor,
                     center,
                     radius);
-            draw.accept(coordinates);
+            draw.accept(relativeCoordinates, coordinates);
             Thread.sleep(delay);
             diff += 0.1;
         }
