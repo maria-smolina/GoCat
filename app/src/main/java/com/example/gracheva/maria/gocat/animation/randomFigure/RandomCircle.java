@@ -10,7 +10,7 @@ import java.util.function.BiConsumer;
 public class RandomCircle extends RandomFigure {
     private Circle circle;
 
-    public RandomCircle(Random random, long delay, Point startingPoint) {
+    public RandomCircle(Random random, Long delay, Point startingPoint) {
         super(startingPoint);
         Point center = new Point(random.nextDouble(), random.nextDouble());
         double radius = CircleUtils.INSTANCE.getRadius(startingPoint, center);

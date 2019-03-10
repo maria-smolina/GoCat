@@ -15,6 +15,7 @@ import com.example.gracheva.maria.gocat.animation.figure.Figure;
 import com.example.gracheva.maria.gocat.animation.figure.Line;
 import com.example.gracheva.maria.gocat.animation.geometry.Point;
 import com.example.gracheva.maria.gocat.animation.randomFigure.RandomCircle;
+import com.example.gracheva.maria.gocat.animation.randomFigure.RandomUnion;
 
 import java.util.Random;
 
@@ -59,7 +60,8 @@ public class PointSurface extends SurfaceView {
                 Random random = new Random();
                 Point startingPoint = new Point(random.nextDouble(), random.nextDouble());
 
-                RandomCircle randomCircle = new RandomCircle(random, DELAY, startingPoint);
+
+                RandomUnion union = new RandomUnion();
 
                 while (true) {
 //                    circle.animate(this::draw)
@@ -68,10 +70,13 @@ public class PointSurface extends SurfaceView {
 //                    line.animate(this::draw);
 //                    line2.animate(this::draw);
 //                    line3.animate(this::draw);
-                    randomCircle.animate(this::draw);
+//                    randomCircle.animate(this::draw);
+                    union.next().animate(this::draw);
                 }
             } catch (InterruptedException e) {
                 System.out.println("Point animation is interrupted");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
