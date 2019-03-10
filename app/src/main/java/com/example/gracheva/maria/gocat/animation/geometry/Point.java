@@ -25,9 +25,9 @@ public class Point {
         this.y = y;
     }
 
-    public void scale(int width, int height) {
-        x *= width;
-        y *= height;
+    public void scale(int scale) {
+        x *= scale;
+        y *= scale;
     }
 
     @Override

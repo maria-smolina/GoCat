@@ -57,10 +57,12 @@ public class PointSurface extends SurfaceView {
                 Figure line3 = new Line(point4, point1, DELAY, false);
 
                 Random random = new Random();
-                RandomCircle randomCircle = new RandomCircle(random, DELAY);
+                Point startingPoint = new Point(random.nextDouble(), random.nextDouble());
+
+                RandomCircle randomCircle = new RandomCircle(random, DELAY, startingPoint);
 
                 while (true) {
-//                    circle.animate(this::draw);
+//                    circle.animate(this::draw)
 //                    circle2.animate(this::draw);
 //                    curve.animate(this::draw);
 //                    line.animate(this::draw);
@@ -79,7 +81,7 @@ public class PointSurface extends SurfaceView {
                 int height = getHeight();
             if (canvas != null) {
                 if (relativeCoordinates) {
-                    point.scale(width, height);
+                    point.scale(Math.min(width, height));
                 }
                 wallpaper.setBounds(0, 0, width, height);
                 wallpaper.draw(canvas);
