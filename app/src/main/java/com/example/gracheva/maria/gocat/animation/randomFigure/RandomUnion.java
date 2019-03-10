@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class RandomUnion {
     private static final Long DELAY = 25L;
-    private static final Class[] figures = new Class[]{ RandomCircle.class };
+    private static final Class[] figures = new Class[]{ RandomCircle.class, RandomCurve.class };
 
     private Random random;
     private Point startingPoint;
@@ -17,8 +17,10 @@ public class RandomUnion {
     }
 
     public RandomFigure next() throws Exception {
-        return (RandomFigure) figures[random.nextInt(figures.length)]
+        RandomFigure figure = (RandomFigure) figures[random.nextInt(figures.length)]
                 .getConstructor(Random.class, Long.class, Point.class)
                 .newInstance(random, DELAY, startingPoint);
+        startingPoint = figure.getEndPoint();
+        return figure;
     }
 }
