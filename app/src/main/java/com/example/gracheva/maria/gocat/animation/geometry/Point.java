@@ -25,9 +25,13 @@ public class Point {
         this.y = y;
     }
 
-    public void scale(int scale) {
+    public void scale(double scale) {
         x *= scale;
         y *= scale;
+    }
+
+    public void scale(Point screenScale) {
+        scale(Math.min(screenScale.getX(), screenScale.getY()));
     }
 
     @Override
