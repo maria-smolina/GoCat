@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class GameActivity extends AppCompatActivity {
-    private BirdView birdView;
+    private ButterflyView butterflyView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +16,8 @@ public class GameActivity extends AppCompatActivity {
 //        setContentView(new PointSurface(getApplicationContext()));
 
 
-        birdView = new BirdView(this);
-        setContentView(birdView);
+        butterflyView = new ButterflyView(this);
+        setContentView(butterflyView);
 
 
         float startX = 300;
@@ -25,8 +25,8 @@ public class GameActivity extends AppCompatActivity {
         PropertyValuesHolder pvhX = PropertyValuesHolder.ofFloat("translationX", startX);
         PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("translationY", startY);
 
-        ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(birdView, pvhX, pvhY);
-        animation.addUpdateListener(birdView);
+        ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(butterflyView, pvhX, pvhY);
+        animation.addUpdateListener(butterflyView);
         animation.setDuration(0);
         animation.start();
 
@@ -38,9 +38,9 @@ public class GameActivity extends AppCompatActivity {
         float deltaX = x - startX;
         float deltaY = y - startY;
         int baseAngle = deltaX > 0 ? 90 : 270;
-        birdView.setAngle(baseAngle - (int) Math.round(Math.toDegrees(Math.atan(-deltaY / deltaX))));
-        animation = ObjectAnimator.ofPropertyValuesHolder(birdView, pvhX, pvhY);
-        animation.addUpdateListener(birdView);
+        butterflyView.setAngle(baseAngle - (int) Math.round(Math.toDegrees(Math.atan(-deltaY / deltaX))));
+        animation = ObjectAnimator.ofPropertyValuesHolder(butterflyView, pvhX, pvhY);
+        animation.addUpdateListener(butterflyView);
         animation.setDuration(5000);
         animation.start();
 
