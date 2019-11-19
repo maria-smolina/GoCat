@@ -15,7 +15,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        buttonGame = findViewById(R.id.game_button);
+        buttonGame = findViewById(R.id.play_button);
 
         OnClickListener buttonGameOnClick = v -> {
             Intent openGameIntent = new Intent(v.getContext(), GameActivity.class);
