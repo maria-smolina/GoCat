@@ -1,5 +1,6 @@
 package com.example.gracheva.maria.gocat;
 
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
@@ -30,19 +31,29 @@ public class ButterflyActivity extends AppCompatActivity {
         animation.setDuration(0);
         animation.start();
 
-        float x = 0;
-        float y = 800;
-        pvhX = PropertyValuesHolder.ofFloat("translationX", x);
-        pvhY = PropertyValuesHolder.ofFloat("translationY", y);
+        AnimatorSet animatorSet = new AnimatorSet();
 
-        float deltaX = x - startX;
-        float deltaY = y - startY;
-        int baseAngle = deltaX > 0 ? 90 : 270;
-        butterflyView.setAngle(baseAngle - (int) Math.round(Math.toDegrees(Math.atan(-deltaY / deltaX))));
-        animation = ObjectAnimator.ofPropertyValuesHolder(butterflyView, pvhX, pvhY);
-        animation.addUpdateListener(butterflyView);
-        animation.setDuration(5000);
-        animation.start();
+        for (int i = 0; i < 10; i++) {
+            float x = (float) (Math.random() * 1000);
+            float y = (float) (Math.random() * 1000);
+            pvhX = PropertyValuesHolder.ofFloat("translationX", x);
+            pvhY = PropertyValuesHolder.ofFloat("translationY", y);
+
+            float deltaX = x - startX;
+            float deltaY = y - startY;
+            int baseAngle = deltaX > 0 ? 90 : 270;
+            butterflyView.setAngle(baseAngle - (int) Math.round(Math.toDegrees(Math.atan(-deltaY / deltaX))));
+            ObjectAnimator animationNext = ObjectAnimator.ofPropertyValuesHolder(butterflyView, pvhX, pvhY);
+            animationNext.addUpdateListener(butterflyView);
+            animationNext.setDuration(5000);
+            animationNext.start();
+            animatorSet.play(animation).before(animationNext);
+            animation = animationNext;
+            startX = x;
+            startY = y;
+        }
+        animatorSet.start();
+
 
 
         // TODO for score
